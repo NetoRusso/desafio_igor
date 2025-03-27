@@ -10,19 +10,26 @@ const Container = styled.section`
   justify-content: center;
   align-items: center;
   font-family: Arial, Helvetica, sans-serif;
-`;
+  `;
 
 const Box1 = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  /* flex-wrap: wrap; */
   gap: 20px;
+  
+  @media (max-width: 980px) { 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 const BoxGrafico = styled.div`
-  width: 700px;
-  height: 750px;
+  width: 500px;
+  height: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -32,10 +39,14 @@ const BoxDados = styled.div`
   width: 700px;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 10px;
+
 `;
 
 const ItemDado = styled.div`
+  width: 50%;
+  min-width: 300px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -74,7 +85,6 @@ const dados = [
 ];
 
 const options = {
-
   visualMap: {
     show: false,
     min: 0,
@@ -84,28 +94,70 @@ const options = {
     {
       type: "pie",
       stillShowZeroSum: false,
-      radius: "90%",
       center: ["50%", "50%"],
       padAngle: 2,
       startAngle: 200,
       endAngle: 560,
       flushSync: true,
       avoidLabelOverlap: true,
-      // clockWise: false,
-
-      data: dados
-      .map((item, index) => ({
+      radius: "90%",
+      data: dados.map((item) => ({
         value: item.porcentagem,
-        radius: ['0%', `${30 + (item.porcentagem * 0.01 + 0.5) * index}%`],
-        z: item.porcentagem,
         itemStyle: {
           color: item.cor,
-          borderWidth: item.porcentagem === 50 ? 70 : item.porcentagem === 40 ? 30 : 20,
-          borderCap: "square",
-          borderColor: item.porcentagem === 10 ? item.cor : "white",
+          opacity: item.porcentagem === 10 ? 1 : 0,
         },
-      }))
-      .sort((a, b) => b.value - a.value),
+      })),
+      label: {
+        show: false,
+      },
+      labelLine: {
+        show: false,
+      },
+      minAngle: 1,
+    },
+    {
+      type: "pie",
+      stillShowZeroSum: false,
+      center: ["50%", "50%"],
+      padAngle: 2,
+      startAngle: 200,
+      endAngle: 560,
+      flushSync: true,
+      avoidLabelOverlap: true,
+      radius: "70%",
+      data: dados.map((item) => ({
+        value: item.porcentagem,
+        itemStyle: {
+          color: item.cor,
+          opacity: item.porcentagem === 40 ? 1 : 0,
+        },
+      })),
+      label: {
+        show: false,
+      },
+      labelLine: {
+        show: false,
+      },
+      minAngle: 1,
+    },
+    {
+      type: "pie",
+      stillShowZeroSum: false,
+      center: ["50%", "50%"],
+      padAngle: 2,
+      startAngle: 200,
+      endAngle: 560,
+      flushSync: true,
+      avoidLabelOverlap: true,
+      radius: "60%",
+      data: dados.map((item) => ({
+        value: item.porcentagem,
+        itemStyle: {
+          color: item.cor,
+          opacity: item.porcentagem === 50 ? 1 : 0,
+        },
+      })),
       label: {
         show: false,
       },
@@ -115,8 +167,8 @@ const options = {
       minAngle: 1,
     },
   ],
+}
 
-};
 
 const Desafio = () => {
   return (
@@ -125,7 +177,7 @@ const Desafio = () => {
 
         <BoxGrafico>
           <ReactEcharts option={options}
-            style={{ width: "100%", height: "auto", minHeight: "500px" }}
+            style={{ width: "90%", height: "auto", minHeight: "500px" }}
           />
         </BoxGrafico>
 
