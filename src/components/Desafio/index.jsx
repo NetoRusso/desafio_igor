@@ -83,33 +83,35 @@ const options = {
     {
       type: "pie",
       stillShowZeroSum: false,
+      radius: "90%",
       center: ["50%", "50%"],
       padAngle: 4,
-      startAngle: 90,
-      endAngle: 360 + 2,
-      itemStyle: {
-        offset: [15, 15],
-      },
+      startAngle: 30,
+      endAngle: 390,
+      flushSync: true,
+      avoidLabelOverlap: true,
+      // clockWise: false,
+
       data: dados
-        .map((item) => ({
-          value: item.porcentagem,
-          radius: ['0%', `${(item.porcentagem * 0.01 + 0.5) * 45}%`],
-          name: item.nome,
-          itemStyle: {
-            color: item.cor,
-            borderWidth: item.porcentagem === 10 ? 1 : item.porcentagem === 40 ? 10 : 15,
-            borderColor: "#fff",
-            offset: [item.porcentagem , item.porcentagem * 0.8],
-          },
-        }))
-        .sort((a, b) => a.value - b.value),
+      .map((item) => ({
+        value: item.porcentagem,
+
+        // radius: ['0%', `${30 + (item.porcentagem * 0.01 + 0.5) * index}%`],
+        name: item.nome,
+        itemStyle: {
+          color: item.cor,
+          borderWidth: item.porcentagem === 10 ? 10 : item.porcentagem -10,
+          borderCap: "square",
+          borderColor: item.porcentagem === 10 ? item.cor : "white",
+        },
+      }))
+      .sort((a, b) => a.value - b.value),
       label: {
         show: false,
       },
       labelLine: {
         show: false,
       },
-      startAngle: 0,
       minAngle: 1,
     },
   ],
