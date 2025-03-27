@@ -100,6 +100,7 @@ const options = {
       endAngle: 560,
       flushSync: true,
       avoidLabelOverlap: true,
+      zlevel: 0,
       radius: "90%",
       data: dados.map((item) => ({
         value: item.porcentagem,
@@ -125,6 +126,7 @@ const options = {
       endAngle: 560,
       flushSync: true,
       avoidLabelOverlap: true,
+      zlevel: 1,
       radius: "70%",
       data: dados.map((item) => ({
         value: item.porcentagem,
@@ -150,6 +152,7 @@ const options = {
       endAngle: 560,
       flushSync: true,
       avoidLabelOverlap: true,
+      zlevel: 2,
       radius: "60%",
       data: dados.map((item) => ({
         value: item.porcentagem,
@@ -167,7 +170,7 @@ const options = {
       minAngle: 1,
     },
   ],
-}
+};
 
 
 const Desafio = () => {
