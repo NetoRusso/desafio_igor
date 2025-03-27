@@ -9,6 +9,7 @@ const Container = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
 `;
 
 const Box1 = styled.div`
@@ -85,27 +86,26 @@ const options = {
       stillShowZeroSum: false,
       radius: "90%",
       center: ["50%", "50%"],
-      padAngle: 4,
-      startAngle: 30,
-      endAngle: 390,
+      padAngle: 2,
+      startAngle: 200,
+      endAngle: 560,
       flushSync: true,
       avoidLabelOverlap: true,
       // clockWise: false,
 
       data: dados
-      .map((item) => ({
+      .map((item, index) => ({
         value: item.porcentagem,
-
-        // radius: ['0%', `${30 + (item.porcentagem * 0.01 + 0.5) * index}%`],
-        name: item.nome,
+        radius: ['0%', `${30 + (item.porcentagem * 0.01 + 0.5) * index}%`],
+        z: item.porcentagem,
         itemStyle: {
           color: item.cor,
-          borderWidth: item.porcentagem === 10 ? 10 : item.porcentagem -10,
+          borderWidth: item.porcentagem === 50 ? 70 : item.porcentagem === 40 ? 30 : 20,
           borderCap: "square",
           borderColor: item.porcentagem === 10 ? item.cor : "white",
         },
       }))
-      .sort((a, b) => a.value - b.value),
+      .sort((a, b) => b.value - a.value),
       label: {
         show: false,
       },
@@ -125,7 +125,7 @@ const Desafio = () => {
 
         <BoxGrafico>
           <ReactEcharts option={options}
-            style={{ width: "100%", height: "500px" }}
+            style={{ width: "100%", height: "auto", minHeight: "500px" }}
           />
         </BoxGrafico>
 
